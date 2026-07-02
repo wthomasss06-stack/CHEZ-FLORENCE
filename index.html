@@ -1,0 +1,3094 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CHEZ FLORENCE — Vente de Lapins</title>
+    <link rel="icon" href="IMAGES/logo.png" type="image/png">
+    <link rel="alternate icon" href="IMAGES/logo-icon.png" type="image/svg+xml">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.17/dist/lenis.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&family=Newsreader:ital,wght@0,400;0,500;1,400;1,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+/* ===================================================================
+   AKAFOLIO — ÉDITION MARRON
+   Système : papier (clair) / encre (sombre) / oxblood (accent)
+   Display  : Bodoni Moda   — titres XXL
+   Body     : Newsreader    — texte courant, intros
+   Label    : IBM Plex Mono — nav, légendes, données
+   =================================================================== */
+
+:root {
+  --paper:        #F3E9DA;
+  --paper-rgb:    243, 233, 218;
+  --paper-deep:   #E4D2B4;
+  --ink:          #2A100B;
+  --ink-rgb:      42, 16, 11;
+  --maroon:       #7C2A1A;
+  --maroon-rgb:   124, 42, 26;
+  --rust:         #C2723D;
+  --rust-rgb:     194, 114, 61;
+
+  --font-display: "Bodoni Moda", "Times New Roman", serif;
+  --font-body:    "Newsreader", Georgia, serif;
+  --font-label:   "IBM Plex Mono", "Courier New", monospace;
+
+  --radius-plate: 10px;
+  --grain: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27200%27%20height%3D%27200%27%3E%3Cfilter%20id%3D%27n%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%270.85%27%20numOctaves%3D%273%27%20stitchTiles%3D%27stitch%27/%3E%3CfeColorMatrix%20type%3D%27matrix%27%20values%3D%270%200%200%200%201%20%200%200%200%200%200.96%20%200%200%200%200%200.88%20%200%200%200%200.45%200%27/%3E%3C/filter%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20filter%3D%27url%28%23n%29%27/%3E%3C/svg%3E");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  background-color: var(--ink);
+}
+
+body {
+  font-family: var(--font-body);
+}
+
+/* Enforce project-wide font usage:
+   - Display fonts for large headings
+   - Body font for regular copy
+   - Label font for nav/labels */
+h1, h2, h3, h4, h5, h6, .heading-xl, .split-heading, .split-heading-1, .page4-heading-1, .page4-heading-2 {
+  font-family: var(--font-display) !important;
+}
+
+nav, .footer-info, .footer-overlay-item, #right-nav a, .price-card-label, .stat-label, .marquee-item, .eyebrow, .footer-info-item {
+  font-family: var(--font-label) !important;
+}
+
+/* Ensure normal text uses the body font */
+p, li, span, div, a, .hero-content, .price-card-desc, .price-card-amount, .price-card-features {
+  font-family: var(--font-body) !important;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* film-grain overlay — static raster texture, no live filter cost */
+#grain {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+  background-image: var(--grain);
+  background-size: 220px 220px;
+  opacity: 0.5;
+  mix-blend-mode: overlay;
+}
+
+/* ---------------------------------------------------------------
+   Section backdrops
+   --------------------------------------------------------------- */
+
+#page1 {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#page2 {
+  width: 100%;
+  height: 350vh;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--ink);
+}
+
+#page3 {
+  width: 100%;
+  height: 400vh;
+  overflow: hidden;
+  position: relative;
+  background-color: var(--ink);
+}
+
+#page4 {
+  position: relative;
+  width: 100%;
+  height: 370vh;
+  overflow: hidden;
+  background-color: var(--paper);
+  z-index: 10;
+}
+
+#page5 {
+  width: 100%;
+  height: 120vh;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--ink);
+}
+
+/* ---------------------------------------------------------------
+   Nav
+   --------------------------------------------------------------- */
+
+nav {
+  position: absolute;
+  top: 1.25vw;
+  left: 1.25vw;
+  right: 1.25vw;
+  width: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0 0 7vw;
+  z-index: 60;
+}
+
+#left-nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 0.8vw;
+  cursor: pointer;
+}
+
+#left-nav h1 {
+  font-size: 1.6vw;
+  color: var(--paper);
+  opacity: 0.45;
+  font-family: var(--font-label);
+  letter-spacing: 0.05em;
+}
+
+#right-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: transparent;
+  width: 22vw;
+  height: 7vh;
+  gap: 2vw;
+}
+
+#nav-logo {
+  position: absolute;
+  top: 1.25vw;
+  left: 1.25vw;
+  width: 6.2vw;
+  height: auto;
+  display: block;
+  z-index: 80;
+}
+#contact-logo {
+  width: 7vw;
+  height: auto;
+  display: block;
+  margin: 0 auto 1.2vw;
+}
+
+#right-nav a {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  color: var(--paper);
+  opacity: 0.55;
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.95vw;
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+#right-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1px;
+  background: var(--rust);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+#right-nav a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ---------------------------------------------------------------
+   Page 1 — Hero
+   --------------------------------------------------------------- */
+
+#heading1 {
+  font-size: 40vw;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: -0.02em;
+  position: absolute;
+  top: 24%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  white-space: nowrap;
+  color: var(--maroon);
+  text-transform: capitalize;
+}
+
+#page1-img-1 {
+  display: none;
+}
+
+#cursor {
+  width: 21px;
+  height: 21px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  pointer-events: none;
+  mix-blend-mode: difference;
+  background-color: var(--paper);
+  border-radius: 50%;
+}
+
+#hero-video-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 0;
+}
+
+#hero-video-wrap video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+#hero-scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(var(--ink-rgb), 0.55) 0%, rgba(var(--ink-rgb), 0.2) 35%, rgba(var(--ink-rgb), 0.8) 100%),
+    radial-gradient(120% 90% at 50% 40%, rgba(var(--ink-rgb), 0.1), rgba(var(--ink-rgb), 0.6) 78%);
+}
+
+#page1-hero-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  width: min(100vw, 96vw);
+  max-width: 96vw;
+  font-size: clamp(6.4rem, 14vw, 18rem);
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-style: italic;
+  color: var(--paper);
+  line-height: 0.92;
+  text-align: center;
+  pointer-events: none;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  text-shadow: 0 8px 22px rgba(0,0,0,0.65);
+}
+
+/* Hero content: description + CTA */
+.hero-content {
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  z-index: 4;
+  text-align: center;
+  pointer-events: auto;
+  color: var(--paper);
+  max-width: 75vw;
+}
+.hero-content p {
+  font-family: var(--font-body);
+  font-style: italic;
+  color: rgba(var(--paper-rgb), 0.9);
+  margin-bottom: 1.6vw;
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
+}
+.hero-cta {
+  display: inline-flex;
+  gap: 0.8vw;
+  align-items: center;
+  justify-content: center;
+  padding: 0.9vw 2.2vw;
+  border-radius: 999px;
+  background-color: var(--rust);
+  color: var(--paper);
+  text-decoration: none;
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.95vw;
+  border: 1px solid var(--rust);
+}
+.hero-cta:hover { background-color: var(--paper); color: var(--ink); }
+
+/* ---------------------------------------------------------------
+   Page 2 — Notre Histoire / Nos Garanties
+   --------------------------------------------------------------- */
+
+#page2-heading-1 {
+  position: absolute;
+  top: 2.5%;
+  left: 2%;
+  transform: translateY(-50%);
+  white-space: nowrap;
+  font-size: 1.05vw;
+  font-family: var(--font-label);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  pointer-events: none;
+  color: var(--paper);
+  opacity: 0.6;
+}
+
+#page2-heading-1::before {
+  content: "No. 02 — ";
+  opacity: 0.6;
+}
+
+#page2-heading-2 {
+  position: absolute;
+  top: 46.5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 19vw;
+  font-family: var(--font-display);
+  font-weight: 600;
+  pointer-events: none;
+  white-space: nowrap;
+  text-transform: uppercase;
+  color: var(--paper);
+  will-change: transform;
+}
+
+#page2-heading-3 {
+  position: absolute;
+  top: 56.5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 22vw;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-style: italic;
+  pointer-events: none;
+  white-space: nowrap;
+  text-transform: uppercase;
+  color: var(--maroon);
+  will-change: transform;
+}
+
+#page2-small-heading {
+  font-size: 1vw;
+  font-family: var(--font-label);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--paper);
+  opacity: 0.4;
+  position: absolute;
+  top: 70.5%;
+  left: 1.5%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+#page2-small-heading-2 {
+  font-size: 0.95vw;
+  font-family: var(--font-label);
+  color: rgba(var(--rust-rgb), 0.65);
+  position: absolute;
+  top: 18.5%;
+  left: 1.5%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  letter-spacing: 0.04em;
+}
+
+#intro-container {
+  position: relative;
+  top: 12%;
+  left: 1.5%;
+  transform: translateY(-50%);
+  width: 90%;
+  pointer-events: none;
+}
+
+#behind-intro,
+#above-intro {
+  font-size: clamp(2.2rem, 4vw, 4.5rem);
+  line-height: 1.15;
+  font-weight: 400;
+  font-style: italic;
+  font-family: var(--font-body);
+}
+
+#behind-intro {
+  color: rgba(var(--paper-rgb), 0.22);
+}
+
+#above-intro {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: var(--paper);
+  clip-path: inset(0 0 100% 0);
+}
+
+#scroll-line {
+  display: block;
+  width: 100%;
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#scroll-line line {
+  stroke: var(--rust) !important;
+}
+
+#skills-container {
+  width: 97vw;
+  height: 95vh;
+  overflow: hidden;
+  position: absolute;
+  top: 85%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-bottom: 1px solid rgba(var(--paper-rgb), 0.3);
+}
+
+#skills-container-1,
+#skills-container-2,
+#skills-container-3,
+#skills-container-4 {
+  width: 100%;
+  height: 23.75vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(var(--paper-rgb), 0.3);
+}
+
+#skill-1a,
+#skill-2a,
+#skill-3a,
+#skill-4a {
+  font-size: 1.7vw;
+  font-family: var(--font-label);
+  letter-spacing: 0.02em;
+  color: var(--paper);
+  pointer-events: none;
+}
+
+#skill-1b,
+#skill-2b,
+#skill-3b,
+#skill-4b {
+  font-size: 1.4vw;
+  font-family: var(--font-body);
+  font-style: italic;
+  width: 30%;
+  color: var(--paper);
+  opacity: 0.62;
+  pointer-events: none;
+}
+
+/* ---------------------------------------------------------------
+   Page 3 — Nos Races
+   --------------------------------------------------------------- */
+
+#page3-heading-1 {
+  font-size: 1.1vw;
+  color: rgba(var(--paper-rgb), 0.45);
+  font-family: var(--font-label);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  pointer-events: none;
+  position: absolute;
+  top: 5%;
+  left: 2%;
+  transform: translateY(-50%);
+}
+
+#page3-heading-1::before {
+  content: "No. 03 — ";
+}
+
+#intro-container-1 {
+  position: absolute;
+  top: 11%;
+  left: 2%;
+  transform: translateY(-50%);
+  width: 80%;
+  pointer-events: none;
+}
+
+#behind-intro-1,
+#above-intro-1 {
+  font-size: clamp(2.2rem, 3.5vw, 4.5rem);
+  line-height: 1.15;
+  font-weight: 400;
+  font-style: italic;
+  font-family: var(--font-body);
+}
+
+#behind-intro-1 {
+  color: rgba(var(--paper-rgb), 0.22);
+}
+
+#above-intro-1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: var(--paper);
+  clip-path: inset(0 0 100% 0);
+}
+
+#page3-img {
+  width: 97vw;
+  height: 135vh;
+  overflow: hidden;
+  pointer-events: none;
+  position: absolute;
+  top: 33%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+  border-radius: var(--radius-plate);
+}
+
+#page3-img-2 {
+  width: 48vw;
+  height: 135vh;
+  overflow: hidden;
+  pointer-events: none;
+  position: absolute;
+  top: 68%;
+  left: 1.5%;
+  transform: translateY(-50%);
+  will-change: transform;
+  border-radius: var(--radius-plate);
+}
+
+#page3-img-3 {
+  width: 48vw;
+  height: 135vh;
+  overflow: hidden;
+  pointer-events: none;
+  position: absolute;
+  top: 68%;
+  right: 1.5%;
+  transform: translateY(-50%);
+  will-change: transform;
+  border-radius: var(--radius-plate);
+}
+
+/* ---------------------------------------------------------------
+   Plates — stand in for photography/video, fully self-contained
+   --------------------------------------------------------------- */
+
+.plate {
+  position: absolute;
+  inset: 0;
+}
+
+.plate::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--grain);
+  background-size: 220px 220px;
+  opacity: 0.55;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+.plate--1 {
+  background:
+    radial-gradient(120% 140% at 14% 10%, rgba(var(--rust-rgb), 0.55), transparent 55%),
+    linear-gradient(155deg, var(--maroon) 0%, var(--ink) 78%);
+}
+
+.plate--2 {
+  background:
+    radial-gradient(120% 140% at 88% 14%, rgba(var(--paper-rgb), 0.16), transparent 55%),
+    linear-gradient(155deg, var(--rust) 0%, var(--maroon) 72%);
+}
+
+.plate--3 {
+  background:
+    radial-gradient(120% 140% at 80% 86%, rgba(var(--rust-rgb), 0.4), transparent 55%),
+    linear-gradient(205deg, var(--ink) 0%, var(--maroon) 82%);
+}
+
+.plate--4 {
+  background:
+    radial-gradient(110% 130% at 20% 90%, rgba(var(--paper-rgb), 0.14), transparent 55%),
+    linear-gradient(165deg, var(--maroon) 0%, var(--rust) 55%, var(--ink) 100%);
+}
+
+.plate-mark {
+  position: absolute;
+  left: 1.4em;
+  bottom: 1.1em;
+  font-family: var(--font-label);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(var(--paper-rgb), 0.78);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ---------------------------------------------------------------
+   Page 4 — Nos Lapins (catalogue)
+   --------------------------------------------------------------- */
+
+#page4 .eyebrow {
+  top: 2%;
+  color: rgba(var(--ink-rgb), 0.5);
+}
+
+#page4-heading-1,
+#page4-heading-2 {
+  pointer-events: none;
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--maroon);
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  text-transform: capitalize;
+  will-change: transform;
+}
+
+#page4-heading-1 {
+  font-size: 20vw;
+  top: 5%;
+}
+
+#page4-heading-2 {
+  font-size: 22vw;
+  top: 15%;
+  font-style: italic;
+  color: var(--ink);
+}
+
+#project-container-1,
+#project-container-2,
+#project-container-3,
+#project-container-4 {
+  width: 49vw;
+  height: 110vh;
+  border-radius: var(--radius-plate);
+  overflow: hidden;
+  position: absolute;
+  transform: translateY(-50%);
+  background-color: var(--ink);
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  will-change: transform;
+}
+
+#project-container-1 { top: 39%; left: 0.5%; }
+#project-container-2 { top: 39%; right: 0.5%; }
+#project-container-3 { top: 70%; left: 0.5%; }
+#project-container-4 {
+  top: 70%;
+  right: 0.5%;
+  border: 1px solid rgba(var(--paper-rgb), 0.08);
+}
+
+#upper-part,
+#upper-part-2,
+#upper-part-3,
+#upper-part-4 {
+  width: 97%;
+  height: 82vh;
+  overflow: hidden;
+  position: absolute;
+  top: 39%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: var(--radius-plate);
+}
+
+.price-tag {
+  position: absolute;
+  top: 1.4vw;
+  right: 1.4vw;
+  z-index: 2;
+  background: rgba(var(--ink-rgb), 0.82);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--paper);
+  font-family: var(--font-label);
+  font-size: 0.85vw;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  padding: 0.55vw 1.1vw;
+  border-radius: 999px;
+  border: 1px solid rgba(var(--paper-rgb), 0.25);
+  pointer-events: none;
+}
+
+#bottom-part,
+#bottom-part-2,
+#bottom-part-3,
+#bottom-part-4 {
+  width: 95%;
+  height: 8vh;
+  overflow: hidden;
+  position: absolute;
+  top: 83%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#bottom-left,
+#bottom-left-1,
+#bottom-left-2,
+#bottom-left-3 {
+  font-size: 2.4vw;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  color: var(--paper);
+}
+
+#bottom-right,
+#bottom-right-1,
+#bottom-right-2,
+#bottom-right-3 {
+  font-size: 1.05vw;
+  cursor: pointer;
+  font-family: var(--font-label);
+  color: var(--rust);
+}
+
+#project-video,
+#project-video-1,
+#project-video-2,
+#project-video-3 {
+  width: 35vw;
+  height: 45vh;
+  overflow: hidden;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.92);
+  pointer-events: none;
+  border-radius: 6px;
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1.5vw;
+  transition:
+    opacity 0.35s ease,
+    transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+  will-change: transform, opacity;
+}
+
+#project-video span,
+#project-video-1 span,
+#project-video-2 span,
+#project-video-3 span {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 2.4vw;
+  color: var(--paper);
+  position: relative;
+  z-index: 2;
+}
+
+#page4-btn {
+  width: 12vw;
+  height: 8vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  white-space: nowrap;
+  cursor: pointer;
+  position: absolute;
+  top: 90%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#page4-btn a {
+  text-decoration: none;
+  font-size: 1.05vw;
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+  font-weight: 600;
+}
+
+#page4-btn i {
+  font-size: 1.4vw;
+  font-weight: bold;
+  color: var(--maroon);
+  padding-bottom: 0.1vw;
+}
+
+.marquee-wrap {
+  width: 100%;
+  overflow: hidden;
+  padding: 0.5rem 3rem;
+  position: absolute;
+  top: 94%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  box-sizing: border-box;
+
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+}
+
+.marquee {
+  display: flex;
+  white-space: nowrap;
+}
+
+.marquee-track {
+  display: flex;
+  gap: 1rem;
+  animation: scroll 25s linear infinite;
+}
+
+.marquee-item {
+  font-size: 0.85vw;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: rgba(var(--paper-rgb), 0.55);
+  font-family: var(--font-label);
+}
+
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ---------------------------------------------------------------
+   Horizontal pinned banner
+   --------------------------------------------------------------- */
+
+.Horizontal {
+  overflow: hidden;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  background-color: var(--ink);
+  z-index: 100;
+}
+
+.Horizontal__text {
+  display: flex;
+  width: max-content;
+  white-space: nowrap;
+  gap: 4vw;
+  padding-left: 100vw;
+  font-family: var(--font-display);
+  font-style: italic;
+  pointer-events: none;
+}
+
+.heading-xl {
+  font-size: clamp(2rem, 14vw, 12rem);
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--paper);
+}
+
+#page4-wave-div {
+  width: 100%;
+  height: 20vh;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: visible;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 1000;
+  will-change: transform;
+}
+
+#page4-wave-div div {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: var(--ink);
+}
+
+/* ---------------------------------------------------------------
+   Hover-follow preview (nos garanties)
+   --------------------------------------------------------------- */
+
+#hover-img {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 350px;
+  height: 400px;
+  opacity: 0;
+  pointer-events: none;
+  background-size: cover;
+  background-position: center;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.2s ease, transform 0.1s ease;
+  border: 1px solid rgba(var(--paper-rgb), 0.25);
+  border-radius: 4px;
+  z-index: 1000;
+}
+
+#hover-img::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--grain);
+  background-size: 220px 220px;
+  opacity: 0.5;
+  mix-blend-mode: overlay;
+}
+
+/* ---------------------------------------------------------------
+   Page 5 — Contact / Hero & Stats
+   --------------------------------------------------------------- */
+
+#page5 {
+  width: 100%;
+  height: auto;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--ink);
+  z-index: 10;
+}
+
+#page5-hero {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+}
+
+#page5-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(var(--ink-rgb), 0.4) 0%, rgba(var(--ink-rgb), 0.2) 30%, rgba(var(--ink-rgb), 0.7) 100%),
+    radial-gradient(120% 90% at 50% 40%, rgba(var(--ink-rgb), 0.2), rgba(var(--ink-rgb), 0.5) 78%);
+  z-index: 2;
+}
+
+#page5-hero-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+#page5-hero-content {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 80vw;
+  pointer-events: none;
+  margin: 0 auto;
+}
+
+#contact-logo {
+  width: 8vw;
+  height: auto;
+  display: block;
+  margin: 0 0 2vw 0;
+}
+
+#page5-hero-footer-overlay {
+  position: absolute;
+  bottom: 4vh;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  pointer-events: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 0 4vw;
+  max-width: 100vw;
+}
+
+.footer-overlay-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4vw;
+}
+
+.footer-overlay-item {
+  font-family: var(--font-label);
+  font-size: 0.95vw;
+  color: rgba(var(--paper-rgb), 0.7);
+  letter-spacing: 0.02em;
+}
+
+#page5-hero-eyebrow {
+  font-family: var(--font-label);
+  font-size: 1vw;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(var(--paper-rgb), 0.65);
+  margin-bottom: 2.5vw;
+}
+
+#page5-hero-title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  line-height: 1.15;
+  color: var(--paper);
+  margin-bottom: 1.2vw;
+}
+
+#page5-hero-subtitle {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: clamp(1rem, 1.4vw, 1.4rem);
+  line-height: 1.6;
+  color: rgba(var(--paper-rgb), 0.75);
+  margin-bottom: 3vw;
+}
+
+#page5-contact-buttons {
+  display: flex;
+  gap: 1.6vw;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  pointer-events: auto;
+}
+
+.contact-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1vw 2.2vw;
+  border-radius: 999px;
+  border: 1px solid rgba(var(--paper-rgb), 0.5);
+  background-color: transparent;
+  color: var(--paper);
+  text-decoration: none;
+  font-family: var(--font-label);
+  font-size: 0.95vw;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  transition: all 0.4s ease;
+  cursor: pointer;
+}
+
+.contact-btn:hover {
+  background-color: var(--paper);
+  color: var(--ink);
+  border-color: var(--paper);
+}
+
+.contact-btn.primary {
+  background-color: var(--rust);
+  border-color: var(--rust);
+  color: var(--paper);
+}
+
+.contact-btn.primary:hover {
+  background-color: var(--paper);
+  color: var(--ink);
+  border-color: var(--paper);
+}
+
+#page1-stats {
+  width: 100%;
+  padding: 8vh 4vw;
+  background-color: var(--ink);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4vw;
+  align-items: center;
+  justify-items: center;
+  position: relative;
+  z-index: 4;
+  border-top: 1px solid rgba(var(--paper-rgb), 0.15);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2vw;
+  padding: 2vw;
+  border: 2px solid rgba(var(--paper-rgb), 0.25);
+  border-radius: 8px;
+  min-width: 200px;
+}
+
+.stat-number {
+  font-family: var(--font-label);
+  font-weight: 700;
+  font-size: clamp(3rem, 5vw, 5rem);
+  color: var(--rust);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+.stat-label {
+  font-family: var(--font-label);
+  font-size: clamp(0.9rem, 1vw, 1rem);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(var(--paper-rgb), 0.55);
+  text-align: center;
+}
+
+#page5-footer-section {
+  width: 100%;
+  padding: 5vh 4vw;
+  background-color: var(--ink);
+  border-top: 1px solid rgba(var(--paper-rgb), 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 4;
+}
+
+.footer-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4vw;
+}
+
+.footer-info-item {
+  font-family: var(--font-label);
+  font-size: 1vw;
+  color: rgba(var(--paper-rgb), 0.6);
+  letter-spacing: 0.02em;
+}
+
+/* ---------------------------------------------------------------
+   Loader
+   --------------------------------------------------------------- */
+
+#loader {
+  width: 100%;
+  height: 100vh;
+  touch-action: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.stair {
+  width: 10vw;
+  height: 100vh;
+  background-color: var(--paper);
+}
+
+#loader-counter {
+  font-size: 15vw;
+  font-family: var(--font-label);
+  pointer-events: none;
+  color: var(--ink);
+  position: absolute;
+  top: 79%;
+  right: 2%;
+  transform: translateY(-50%);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+  line-height: 1;
+  will-change: transform;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+#loader-line {
+  position: absolute;
+  top: 90%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+#loader-line line {
+  stroke: var(--ink) !important;
+}
+
+/* ---------------------------------------------------------------
+   Real photography — fills the plate containers directly with img/video
+   --------------------------------------------------------------- */
+
+#page1-img-1 img,
+#page3-img img,
+#page3-img-2 img,
+#page3-img-3 img,
+#upper-part img,
+#upper-part-2 img,
+#upper-part-3 img,
+#upper-part-4 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: filter 0.5s ease, transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+#page1-img-1::after,
+#page3-img::after,
+#page3-img-2::after,
+#page3-img-3::after,
+#upper-part::after,
+#upper-part-2::after,
+#upper-part-3::after,
+#upper-part-4::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--grain);
+  background-size: 220px 220px;
+  opacity: 0.35;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+#project-video,
+#project-video-1,
+#project-video-2,
+#project-video-3 {
+  padding: 0;
+}
+
+#project-video video,
+#project-video-1 video,
+#project-video-2 video,
+#project-video-3 video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 6px;
+}
+
+/* ---------------------------------------------------------------
+   Shared eyebrow (No. 0X — (Label)) for the three new gallery sections
+   --------------------------------------------------------------- */
+
+.eyebrow {
+  position: absolute;
+  top: 5%;
+  left: 2%;
+  transform: translateY(-50%);
+  font-size: 1.05vw;
+  font-family: var(--font-label);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(var(--paper-rgb), 0.45);
+  pointer-events: none;
+  z-index: 5;
+}
+
+.eyebrow::before {
+  content: attr(data-no) " — ";
+}
+
+/* ---------------------------------------------------------------
+   No. 04 — Triptyque (LE DÉPLOIEMENT EN TRIPTYQUE)
+   --------------------------------------------------------------- */
+
+.fx-section {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: var(--ink);
+}
+
+#sec-gallery {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.triptych-wrapper {
+  display: flex;
+  gap: 20px;
+  width: 80vw;
+  height: 60vh;
+  will-change: width, height, gap;
+}
+
+.trip-panel {
+  flex: 1;
+  overflow: hidden;
+  will-change: flex, opacity;
+  border-radius: 10px;
+  position: relative;
+}
+
+.trip-center {
+  flex: 2;
+  position: relative;
+}
+
+.trip-side {
+  flex: 1;
+  position: relative;
+}
+
+.trip-panel img {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  transform: translateX(0);
+}
+
+.trip-panel.trip-side:first-child img {
+  transform: translateX(0);
+}
+
+.trip-panel.trip-center img {
+  transform: translateX(-25vw);
+}
+
+.trip-panel.trip-side:last-child img {
+  transform: translateX(-50vw);
+}
+
+#sec-gallery::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--grain);
+  background-size: 220px 220px;
+  opacity: 0.3;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* ---------------------------------------------------------------
+   No. 05 — Portrait (cinematic iris, ported from superfortttt.html #4)
+   --------------------------------------------------------------- */
+
+#sec-iris .iris-word {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 700;
+  font-size: 8vw;
+  color: rgba(var(--paper-rgb), 0.12);
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.takeover-layer {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+}
+
+.takeover-layer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.takeover-layer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--grain);
+  background-size: 220px 220px;
+  opacity: 0.35;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+.iris-mask {
+  clip-path: circle(0% at 50% 50%);
+  will-change: clip-path;
+}
+
+/* ---------------------------------------------------------------
+   No. 06 — En Mouvement (organic bloom, ported from superfortttt.html #6)
+   --------------------------------------------------------------- */
+
+.blob-mask {
+  inset: 0;
+  transform: scale(0.12);
+  transform-origin: center center;
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  overflow: hidden;
+  will-change: transform, border-radius;
+  position: absolute;
+  box-shadow: 0 0 0 1px rgba(var(--paper-rgb), 0.15);
+}
+
+.blob-mask video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(2);
+  will-change: transform;
+}
+
+/* ---------------------------------------------------------------
+   No. 07 — Tarifs (pricing tiers, adapted from website_design.jpg)
+   --------------------------------------------------------------- */
+
+#sec-pricing {
+  position: relative;
+  width: 100%;
+  padding: 14vh 4vw 12vh;
+  background-color: var(--ink);
+  overflow: hidden;
+}
+
+.pricing-title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: clamp(2.2rem, 4.2vw, 4.2rem);
+  color: var(--paper);
+  text-align: center;
+  max-width: 20ch;
+  margin: 0 auto 1.2vw;
+}
+
+.pricing-sub {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: clamp(1rem, 1.2vw, 1.2rem);
+  line-height: 1.5;
+  color: rgba(var(--paper-rgb), 0.6);
+  text-align: center;
+  max-width: 44ch;
+  margin: 0 auto 6vw;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.6vw;
+  max-width: 1180px;
+  margin: 0 auto;
+  align-items: center;
+}
+
+.price-card {
+  position: relative;
+  background: linear-gradient(165deg, rgba(var(--paper-rgb), 0.06), rgba(var(--ink-rgb), 0.4));
+  border: 1px solid rgba(var(--paper-rgb), 0.14);
+  border-radius: 20px;
+  padding: 2.2vw 1.8vw;
+}
+
+.price-card--featured {
+  background: linear-gradient(165deg, var(--maroon), var(--ink) 85%);
+  border-color: rgba(var(--rust-rgb), 0.5);
+  transform: scale(1.05);
+  box-shadow: 0 30px 70px rgba(var(--ink-rgb), 0.5);
+  z-index: 2;
+}
+
+.price-card-label {
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.85vw;
+  color: rgba(var(--paper-rgb), 0.6);
+  margin-bottom: 1vw;
+}
+
+.price-card-amount {
+  font-family: var(--font-label);
+  font-weight: 600;
+  font-size: 2.6vw;
+  color: var(--paper);
+  margin-bottom: 0.5vw;
+}
+
+.price-card-amount span {
+  font-size: 0.5em;
+  font-weight: 500;
+  color: rgba(var(--paper-rgb), 0.55);
+  margin-left: 0.4em;
+}
+
+.price-card-desc {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 0.95vw;
+  color: rgba(var(--paper-rgb), 0.6);
+  margin-bottom: 1.6vw;
+}
+
+.price-card-btn {
+  display: block;
+  text-align: center;
+  width: 100%;
+  padding: 0.85vw 0;
+  border-radius: 999px;
+  border: 1px solid rgba(var(--paper-rgb), 0.5);
+  color: var(--paper);
+  text-decoration: none;
+  font-family: var(--font-label);
+  font-size: 0.85vw;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  transition: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease;
+}
+
+.price-card-btn:hover {
+  background-color: var(--paper);
+  color: var(--ink);
+  border-color: var(--paper);
+}
+
+.price-card--featured .price-card-btn {
+  background-color: var(--paper);
+  color: var(--ink);
+  border-color: var(--paper);
+}
+
+.price-card--featured .price-card-btn:hover {
+  background-color: transparent;
+  color: var(--paper);
+  border-color: rgba(var(--paper-rgb), 0.5);
+}
+
+.price-card-divider {
+  height: 1px;
+  background: rgba(var(--paper-rgb), 0.16);
+  margin: 1.8vw 0 1.4vw;
+}
+
+.price-card-features {
+  list-style: none;
+}
+
+.price-card-features li {
+  display: flex;
+  align-items: center;
+  gap: 0.6vw;
+  font-family: var(--font-label);
+  font-size: 0.85vw;
+  color: rgba(var(--paper-rgb), 0.85);
+  margin-bottom: 0.9vw;
+}
+
+.price-card-features i {
+  color: var(--rust);
+  font-size: 1.1em;
+  flex-shrink: 0;
+}
+
+/* ===================================================================
+   Mobile
+   =================================================================== */
+
+@media (max-width: 767px) {
+  #page1 {
+    width: 100%;
+    height: 120vh;
+    position: relative;
+    overflow: hidden;
+    background-color: var(--ink);
+  }
+  #heading1 {
+    font-size: 40vw;
+    top: 30%;
+  }
+  #page1-img-1 {
+    height: 70vh;
+  }
+  #hero-video-wrap video {
+    display: none;
+  }
+  #hero-video-wrap {
+    background-image: url('IMAGES/Snapchat-1016404691~1.webp');
+    background-size: cover;
+    background-position: center;
+  }
+  .hero-content {
+    width: 90vw;
+    left: 5%;
+    bottom: 5vh;
+  }
+  .hero-content .eyebrow {
+    font-size: 3vw;
+  }
+  .hero-content p {
+    font-size: 3.6vw;
+    margin-bottom: 4vw;
+  }
+  .hero-cta {
+    padding: 3vw 5vw;
+    font-size: 3.2vw;
+    gap: 2vw;
+  }
+  #cursor {
+    display: none;
+  }
+  nav {
+    padding: 0.5vw 2vw;
+  }
+
+  /* mobile: reset absolute nav positioning */
+  nav {
+    position: static;
+    top: auto;
+    right: auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5vw 2vw;
+  }
+  #left-nav {
+    display: none;
+  }
+  #right-nav {
+    width: 100%;
+    justify-content: space-between;
+  }
+  #nav-logo { width: 10vw; }
+  #right-nav a {
+    font-size: 3.6vw;
+  }
+  #page2 {
+    height: 250vh;
+  }
+  #page2-heading-1 {
+    font-size: 3.4vw;
+    top: 3.5%;
+    left: 2.5%;
+  }
+  #intro-container {
+    top: 15%;
+    left: 2.5%;
+  }
+  #page2-small-heading {
+    font-size: 2.8vw;
+    top: 58.3%;
+    left: 2%;
+  }
+  #page2-small-heading-2 {
+    font-size: 3vw;
+    top: 27.5%;
+    left: 2.5%;
+  }
+  #page2-heading-2 {
+    font-size: 24vw;
+  }
+  #page2-heading-3 {
+    top: 51.5%;
+    font-size: 28vw;
+  }
+  #page3 {
+    margin-top: -1px;
+  }
+  #skills-container {
+    top: 78%;
+  }
+  #skills-container-1,
+  #skills-container-2,
+  #skills-container-3,
+  #skills-container-4 {
+    justify-content: space-around;
+    flex-direction: column;
+  }
+  #skill-1a { font-size: 6vw; }
+  #skill-2a,
+  #skill-3a,
+  #skill-4a { font-size: 4.6vw; }
+  #skill-1b,
+  #skill-2b,
+  #skill-3b,
+  #skill-4b {
+    font-size: 3.4vw;
+    color: var(--paper);
+    opacity: 0.55;
+    width: 75%;
+    padding-left: 6vw;
+  }
+  #page3-heading-1 {
+    top: 3%;
+    left: 2.5%;
+    font-size: 3.4vw;
+    color: rgba(var(--paper-rgb), 0.55);
+  }
+  #intro-container-1 {
+    top: 9.5%;
+    left: 2.5%;
+  }
+  #page3-img-2 {
+    width: 97vw;
+    height: 90vh;
+    top: 61.5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  #page3-img-3 {
+    width: 97vw;
+    height: 90vh;
+    top: 84.3%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  #sec-pricing {
+    padding: 10vh 5vw 8vh;
+  }
+  .pricing-title {
+    font-size: 8.5vw;
+  }
+  .pricing-sub {
+    font-size: 4vw;
+    margin-bottom: 10vw;
+  }
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    gap: 6vw;
+  }
+  .price-card {
+    padding: 7vw 6vw;
+  }
+  .price-card--featured {
+    transform: none;
+  }
+  .price-card-label {
+    font-size: 3.4vw;
+  }
+  .price-card-amount {
+    font-size: 9vw;
+  }
+  .price-card-desc {
+    font-size: 3.6vw;
+  }
+  .price-card-btn {
+    padding: 3.4vw 0;
+    font-size: 3.4vw;
+  }
+  .price-card-divider {
+    margin: 6vw 0 5vw;
+  }
+  .price-card-features li {
+    font-size: 3.4vw;
+    gap: 2.5vw;
+    margin-bottom: 3vw;
+  }
+  .price-tag {
+    top: 3vw;
+    right: 3vw;
+    font-size: 2.8vw;
+    padding: 1.4vw 2.6vw;
+  }
+  #page4 {
+    height: 380vh;
+  }
+  #page4-heading-1 {
+    top: 4.5%;
+    font-size: 22vw;
+  }
+  #page4-heading-2 {
+    top: 7.5%;
+    font-size: 25vw;
+  }
+  #project-container-1 {
+    width: 97vw;
+    height: 70vh;
+    top: 22%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  #upper-part {
+    top: 38%;
+    width: 95%;
+    height: 50vh;
+  }
+  #bottom-left,
+  #bottom-right { font-size: 4.4vw; }
+  .marquee-item { font-size: 2.6vw; }
+  #project-container-2 {
+    width: 97vw;
+    height: 70vh;
+    top: 41.5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  #upper-part-2 {
+    top: 38%;
+    width: 95%;
+    height: 50vh;
+  }
+  #bottom-left-1,
+  #bottom-right-1 { font-size: 4.4vw; }
+  #project-container-3 {
+    width: 97vw;
+    height: 70vh;
+    top: 60.9%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  #upper-part-3 {
+    top: 38%;
+    width: 95%;
+    height: 50vh;
+  }
+  #bottom-left-2,
+  #bottom-right-2 { font-size: 4.4vw; }
+  #project-container-4 {
+    width: 97vw;
+    height: 70vh;
+    top: 80.3%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  #upper-part-4 {
+    top: 38%;
+    width: 95%;
+    height: 50vh;
+  }
+  #bottom-left-3,
+  #bottom-right-3 { font-size: 4.4vw; }
+  #page4-btn {
+    width: 27vw;
+    height: 20vh;
+    top: 92%;
+  }
+  #page4-btn a { font-size: 3.6vw; }
+  #page4-btn i { font-size: 4.6vw; }
+  #page4-wave-div div {
+    width: 100px;
+    height: 100px;
+  }
+  #hover-img { display: none; }
+  #project-video, #project-video-1, #project-video-2, #project-video-3 {
+    display: none;
+  }
+  #page5 { margin-top: -1px; }
+  #page5-hero {
+    height: auto;
+    min-height: 55vh;
+    padding: 8vh 0;
+  }
+  #page5-hero-content {
+    max-width: 90vw;
+  }
+  #page5-hero-eyebrow {
+    font-size: 3vw;
+    margin-bottom: 3.5vw;
+  }
+  #page5-hero-title {
+    font-size: 5.5vw;
+    margin-bottom: 2vw;
+  }
+  #page5-hero-subtitle {
+    font-size: 3.2vw;
+    margin-bottom: 4vw;
+  }
+  #page5-contact-buttons {
+    gap: 2vw;
+  }
+  .contact-btn {
+    padding: 2.5vw 4vw;
+    font-size: 3vw;
+  }
+  #page1 {
+    height: 60vh;
+  }
+  #page1-hero-title {
+    font-size: 8vw;
+  }
+  #page1-stats {
+    grid-template-columns: 1fr;
+    gap: 3vw;
+    padding: 6vh 5vw;
+  }
+  .stat-item {
+    min-width: auto;
+    width: 100%;
+  }
+  .stat-number {
+    font-size: 8vw;
+  }
+  .stat-label {
+    font-size: 3.2vw;
+  }
+  #page5-hero-footer-overlay {
+    flex-direction: column;
+    gap: 2vw;
+    align-items: center;
+    padding: 0 5vw;
+  }
+  .footer-overlay-left {
+    text-align: center;
+  }
+  .footer-info {
+    text-align: center;
+  }
+  .footer-info-item {
+    font-size: 3vw;
+  }
+
+  .fx-section {
+    height: auto;
+    min-height: 55vh;
+    padding: 10vh 0;
+  }
+  .eyebrow {
+    position: static;
+    display: block;
+    text-align: center;
+    font-size: 3vw;
+    margin-bottom: 4vh;
+    transform: none;
+  }
+  #sec-gallery {
+    flex-direction: column;
+  }
+  .triptych-wrapper {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none !important;
+    width: 92vw;
+    height: auto;
+    flex-direction: row;
+    gap: 1.5vw;
+  }
+  .trip-panel {
+    aspect-ratio: 1 / 1;
+    opacity: 1;
+  }
+  .trip-side {
+    opacity: 1;
+  }
+  #sec-iris {
+    flex-direction: column;
+  }
+  #sec-iris .iris-word {
+    font-size: 13vw;
+    order: 2;
+    margin-top: 4vh;
+  }
+  .takeover-layer.iris-mask {
+    clip-path: none !important;
+    position: relative;
+    width: 92vw;
+    height: 45vh;
+    top: auto; left: auto;
+    border-radius: 10px;
+    overflow: hidden;
+    order: 1;
+  }
+  #sec-blob .blob-mask {
+    position: relative;
+    width: 92vw;
+    height: 45vh;
+    border-radius: 16px;
+    transform: none !important;
+  }
+  #sec-blob .blob-mask video {
+    transform: none !important;
+  }
+  #page5-hero-footer-overlay {
+    flex-direction: column;
+    gap: 2vw;
+    align-items: center;
+    padding: 0 5vw;
+    bottom: 3vh;
+  }
+  .footer-overlay-left {
+    text-align: center;
+  }
+  .footer-overlay-item {
+    font-size: 2.8vw;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  #upper-part:hover ~ #project-video,
+  #upper-part-2:hover ~ #project-video-1,
+  #upper-part-3:hover ~ #project-video-2,
+  #upper-part-4:hover ~ #project-video-3 {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  #upper-part:hover img,
+  #upper-part-2:hover img,
+  #upper-part-3:hover img,
+  #upper-part-4:hover img {
+    filter: blur(6px) brightness(0.7);
+    transform: scale(1.03);
+  }
+
+  #loader-line {
+    top: 93.5%;
+  }
+}
+
+@media (pointer: coarse) and (min-width: 481px) {
+  #cursor {
+    display: none !important;
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  #right-nav a::after {
+    display: none !important;
+  }
+}
+
+    </style>
+</head>
+
+<body>
+    <div id="grain"></div>
+    <div id="loader">
+        <div class="stair"></div>
+        <div class="stair"></div>
+        <div class="stair"></div>
+        <div class="stair"></div>
+        <div class="stair"></div>
+        <div class="stair"></div>
+        <div class="stair"></div>
+        <div class="stair"></div>
+        <div class="stair"></div>
+        <div class="stair"></div>
+        <div id="loader-counter">0%</div>
+        <svg id="loader-line" width="97%" height="4" viewBox="0 0 1000 2" preserveAspectRatio="none">
+            <line x1="0" y1="1" x2="1000" y2="1" stroke="#111" stroke-width="50" stroke-linecap="round" />
+        </svg>
+    </div>
+    <div id="page1">
+        <div id="hero-video-wrap">
+            <video muted loop autoplay playsinline preload="auto"
+                poster="IMAGES/Snapchat-1016404691~1.webp"
+                src="IMAGES/Snapchat-1268559920.webm"></video>
+            <div id="hero-scrim"></div>
+        </div>
+        <nav>
+          <div id="left-nav">
+                <img id="nav-logo" src="IMAGES/logo.png" alt="CHEZ FLORENCE logo">
+          </div>
+          <div id="right-nav">
+            <a href="#page4">Nos Lapins</a>
+            <a href="#page2">Notre Histoire</a>
+            <a href="#page5">Contact</a>
+          </div>
+        </nav>
+        <div id="page1-hero-title">CHEZ FLORENCE</div>
+        <div class="hero-content">
+          <p>Élevage local — santé contrôlée, pesée précise, et suivi après-vente pour chaque achat.</p>
+          <a class="hero-cta" href="#page5">Contactez-nous</a>
+        </div>
+        <div id="cursor"></div>
+    </div>
+
+    <section id="page1-stats">
+        <div class="stat-item">
+            <div class="stat-number">0</div>
+            <div class="stat-label">Lapins en Stock</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">0</div>
+            <div class="stat-label">Races Élevées</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">0</div>
+            <div class="stat-label">Vendus par Mois</div>
+        </div>
+    </section>
+    <div id="page2">
+        <div id="page2-heading-1">(Notre Histoire)</div>
+        <div id="intro-container">
+            <div id="behind-intro">
+                Nous élevons et sélectionnons nos lapins avec soin — pesée précise, bonne santé, et un
+                accompagnement complet du choix jusqu'à la vente.
+            </div>
+
+            <div id="above-intro">
+                Nous élevons et sélectionnons nos lapins avec soin — pesée précise, bonne santé, et un
+                accompagnement complet du choix jusqu'à la vente.
+            </div>
+        </div>
+        <svg id="scroll-line" width="100%" height="2" viewBox="0 0 1000 2" preserveAspectRatio="none">
+            <line x1="0" y1="1" x2="1000" y2="1" stroke="#ffffff" stroke-width="12" stroke-linecap="round" />
+        </svg>
+
+        <div id="page2-heading-2" class="split-heading-1">Nos</div>
+        <div id="page2-heading-3" class="split-heading-1">Garanties</div>
+        <div id="page2-small-heading">Nos engagements :</div>
+        <div id="page2-small-heading-2">── Santé · Race · Suivi</div>
+        <div id="skills-container">
+            <div id="skills-container-1" class="hover-item"
+                data-img="url('IMAGES/Snapchat-1244423645~1.webp')">
+                <div id="skill-1a"> 01. Santé Vérifiée</div>
+                <div id="skill-1b">Chaque lapin est examiné avant la vente : poids, pelage et comportement
+                    contrôlés avec soin.</div>
+            </div>
+            <div id="skills-container-2" class="hover-item"
+                data-img="url('IMAGES/Snapchat-1244900246~1.webp')">
+                <div id="skill-2a">02. Pesée & Classement</div>
+                <div id="skill-2b">Chaque lapin est pesé et classé avec précision — du format simple au lot
+                    pour les restaurateurs.</div>
+            </div>
+            <div id="skills-container-3" class="hover-item"
+                data-img="url('IMAGES/Snapchat-1671304199~1.webp')">
+                <div id="skill-3a">03. Suivi Après-Vente</div>
+                <div id="skill-3b">Conseils de conservation et d'élevage disponibles après chaque
+                    achat.</div>
+            </div>
+            <div id="skills-container-4" class="hover-item"
+                data-img="url('IMAGES/Snapchat-468138222~1.webp')">
+                <div id="skill-4a">04. Remise en Main Propre</div>
+                <div id="skill-4b">Retrait sur place ou livraison encadrée, selon votre disponibilité et votre
+                    zone.</div>
+            </div>
+        </div>
+        <div id="hover-img"></div>
+      </div>
+
+      <!-- Pricing and Nos Lapins moved here from later in the document -->
+      <section id="sec-pricing">
+        <div class="eyebrow" data-no="No. 07">(Tarifs)</div>
+        <h2 class="pricing-title">Un tarif pour chaque besoin</h2>
+        <p class="pricing-sub">Le prix dépend du poids et de la quantité — à l'unité, en duo, ou en gros
+          pour les professionnels.</p>
+        <div class="pricing-grid">
+          <div class="price-card">
+            <div class="price-card-label">À l'Unité</div>
+            <div class="price-card-amount">15 000<span>FCFA</span></div>
+            <div class="price-card-desc">1 lapin, environ 2 kg</div>
+            <a href="#page5" class="price-card-btn">Réserver</a>
+            <div class="price-card-divider"></div>
+            <ul class="price-card-features">
+              <li><i class="ri-checkbox-circle-fill"></i>Environ 2 kg</li>
+              <li><i class="ri-checkbox-circle-fill"></i>Lapin sélectionné et pesé</li>
+              <li><i class="ri-checkbox-circle-fill"></i>Disponible toute la semaine</li>
+              <li><i class="ri-checkbox-circle-fill"></i>Retrait ou livraison</li>
+            </ul>
+          </div>
+          <div class="price-card price-card--featured">
+            <div class="price-card-label">Le Duo</div>
+            <div class="price-card-amount">25 000<span>FCFA</span></div>
+            <div class="price-card-desc">2 lapins, environ 1,6 kg chacun</div>
+            <a href="#page5" class="price-card-btn">Réserver</a>
+            <div class="price-card-divider"></div>
+            <ul class="price-card-features">
+              <li><i class="ri-checkbox-circle-fill"></i>Environ 1,6 kg par lapin</li>
+              <li><i class="ri-checkbox-circle-fill"></i>Le format le plus demandé</li>
+              <li><i class="ri-checkbox-circle-fill"></i>Idéal pour un repas en famille</li>
+              <li><i class="ri-checkbox-circle-fill"></i>Retrait ou livraison</li>
+            </ul>
+          </div>
+          <div class="price-card">
+            <div class="price-card-label">Format Restaurateur</div>
+            <div class="price-card-amount">80 000<span>FCFA</span></div>
+            <div class="price-card-desc">Lot de 6 lapins — restaurants & mini-restos</div>
+            <a href="#page5" class="price-card-btn">Réserver</a>
+            <div class="price-card-divider"></div>
+            <ul class="price-card-features">
+              <li><i class="ri-checkbox-circle-fill"></i>Lot de 6 lapins</li>
+              <li><i class="ri-checkbox-circle-fill"></i>Tarif préférentiel volume</li>
+              <li><i class="ri-checkbox-circle-fill"></i>Pour restaurateurs & mini-restos</li>
+              <li><i class="ri-checkbox-circle-fill"></i>Livraison possible selon zone</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <div id="page4">
+        <div class="eyebrow" data-no="No. 08">(Nos Lapins)</div>
+        <div id="page4-heading-1" class="split-heading">Nos</div>
+        <div id="page4-heading-2" class="split-heading">Lapins</div>
+        <div id="project-container-1">
+          <div id="upper-part" data-video-target="#project-video">
+            <img src="IMAGES/Snapchat-73962748~1.webp" loading="lazy" alt="Lapin à l'unité, environ 2kg">
+            <span class="price-tag">15 000 FCFA</span>
+          </div>
+          <div id="bottom-part">
+            <div id="bottom-left">Format Simple</div>
+            <div id="bottom-right">~2 kg</div>
+          </div>
+          <div class="marquee-wrap">
+            <div class="marquee">
+              <div class="marquee-track">
+                <span class="marquee-item">Environ 2 kg,</span>
+                <span class="marquee-item">Lapin Frais,</span>
+                <span class="marquee-item">Sélectionné,</span>
+                <span class="marquee-item">Pesé avec Soin,</span>
+                <span class="marquee-item">Disponible,</span>
+                <span class="marquee-item">Retrait Rapide,</span>
+                <span class="marquee-item">Qualité Contrôlée,</span>
+                <span class="marquee-item">Prêt à la Vente,</span>
+                <span class="marquee-item">En Stock,</span>
+
+
+                <span class="marquee-item">Environ 2 kg,</span>
+                <span class="marquee-item">Lapin Frais,</span>
+                <span class="marquee-item">Sélectionné,</span>
+                <span class="marquee-item">Pesé avec Soin,</span>
+                <span class="marquee-item">Disponible,</span>
+                <span class="marquee-item">Retrait Rapide,</span>
+                <span class="marquee-item">Qualité Contrôlée,</span>
+                <span class="marquee-item">Prêt à la Vente,</span>
+                <span class="marquee-item">En Stock,</span>
+              </div>
+            </div>
+          </div>
+          <div id="project-video">
+            <video muted loop playsinline preload="metadata" src="IMAGES/Snapchat-1680052335.webm"></video>
+          </div>
+        </div>
+        <div id="project-container-2">
+          <div id="upper-part-2" data-video-target="#project-video-1">
+            <img src="IMAGES/Snapchat-763078288~1.webp" loading="lazy" alt="Duo de lapins, environ 1,6kg chacun">
+            <span class="price-tag">25 000 FCFA</span>
+          </div>
+          <div id="bottom-part-2">
+            <div id="bottom-left-1">Format Duo</div>
+            <div id="bottom-right-1">~1,6 kg/u</div>
+          </div>
+          <div class="marquee-wrap">
+            <div class="marquee">
+              <div class="marquee-track">
+                <span class="marquee-item">2 Lapins,</span>
+                <span class="marquee-item">1,6 kg Chacun,</span>
+                <span class="marquee-item">Format Duo,</span>
+                <span class="marquee-item">Le Plus Demandé,</span>
+                <span class="marquee-item">Frais du Jour,</span>
+                <span class="marquee-item">Sélectionné,</span>
+                <span class="marquee-item">Disponible,</span>
+                <span class="marquee-item">Retrait Rapide,</span>
+                <span class="marquee-item">En Stock,</span>
+
+
+                <span class="marquee-item">2 Lapins,</span>
+                <span class="marquee-item">1,6 kg Chacun,</span>
+                <span class="marquee-item">Format Duo,</span>
+                <span class="marquee-item">Le Plus Demandé,</span>
+                <span class="marquee-item">Frais du Jour,</span>
+                <span class="marquee-item">Sélectionné,</span>
+                <span class="marquee-item">Disponible,</span>
+                <span class="marquee-item">Retrait Rapide,</span>
+                <span class="marquee-item">En Stock,</span>
+              </div>
+            </div>
+          </div>
+          <div id="project-video-1">
+            <video muted loop playsinline preload="metadata" src="IMAGES/Snapchat-2076662897.webm"></video>
+          </div>
+        </div>
+        <div id="project-container-3">
+          <div id="upper-part-3" data-video-target="#project-video-2">
+            <img src="IMAGES/Snapchat-90679770~1.webp" loading="lazy" alt="Lot de 6 lapins pour restaurateurs">
+            <span class="price-tag">80 000 FCFA</span>
+          </div>
+          <div id="bottom-part-3">
+            <div id="bottom-left-2">Format Restaurateur</div>
+            <div id="bottom-right-2">Lot de 6</div>
+          </div>
+          <div class="marquee-wrap">
+            <div class="marquee">
+              <div class="marquee-track">
+                <span class="marquee-item">Lot de 6,</span>
+                <span class="marquee-item">Tarif Professionnel,</span>
+                <span class="marquee-item">Pour Restaurateurs,</span>
+                <span class="marquee-item">Mini-Restos,</span>
+                <span class="marquee-item">Livraison Possible,</span>
+                <span class="marquee-item">Prix de Gros,</span>
+                <span class="marquee-item">Qualité Constante,</span>
+                <span class="marquee-item">Sur Réservation,</span>
+                <span class="marquee-item">Disponible,</span>
+
+
+                <span class="marquee-item">Lot de 6,</span>
+                <span class="marquee-item">Tarif Professionnel,</span>
+                <span class="marquee-item">Pour Restaurateurs,</span>
+                <span class="marquee-item">Mini-Restos,</span>
+                <span class="marquee-item">Livraison Possible,</span>
+                <span class="marquee-item">Prix de Gros,</span>
+                <span class="marquee-item">Qualité Constante,</span>
+                <span class="marquee-item">Sur Réservation,</span>
+                <span class="marquee-item">Disponible,</span>
+              </div>
+            </div>
+          </div>
+          <div id="project-video-2">
+            <video muted loop playsinline preload="metadata" src="IMAGES/Snapchat-888968271.webm"></video>
+          </div>
+        </div>
+        <div id="project-container-4">
+          <div id="upper-part-4" data-video-target="#project-video-3">
+            <img src="IMAGES/Snapchat-908462874.webp" loading="lazy" alt="Commande spéciale, grand format">
+            <span class="price-tag">Sur demande</span>
+          </div>
+          <div id="bottom-part-4">
+            <div id="bottom-left-3">Sur Commande</div>
+            <div id="bottom-right-3">Sur devis</div>
+          </div>
+          <div class="marquee-wrap">
+            <div class="marquee">
+              <div class="marquee-track">
+                <span class="marquee-item">Grand Format,</span>
+                <span class="marquee-item">Commande Spéciale,</span>
+                <span class="marquee-item">Quantité Sur Mesure,</span>
+                <span class="marquee-item">Devis Rapide,</span>
+                <span class="marquee-item">Pour Événements,</span>
+                <span class="marquee-item">Professionnels Bienvenus,</span>
+                <span class="marquee-item">Réponse Rapide,</span>
+                <span class="marquee-item">Flexible,</span>
+                <span class="marquee-item">Sur Demande,</span>
+
+
+                <span class="marquee-item">Grand Format,</span>
+                <span class="marquee-item">Commande Spéciale,</span>
+                <span class="marquee-item">Quantité Sur Mesure,</span>
+                <span class="marquee-item">Devis Rapide,</span>
+                <span class="marquee-item">Pour Événements,</span>
+                <span class="marquee-item">Professionnels Bienvenus,</span>
+                <span class="marquee-item">Réponse Rapide,</span>
+                <span class="marquee-item">Flexible,</span>
+                <span class="marquee-item">Sur Demande,</span>
+              </div>
+            </div>
+          </div>
+          <div id="project-video-3">
+            <video muted loop playsinline preload="metadata" src="IMAGES/Snapchat-1268559920.webm"></video>
+          </div>
+        </div>
+        <div id="page4-wave-div">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div id="page4-btn"><a href="#page5">Voir tout</a><i class="ri-arrow-right-up-line"></i></div>
+      </div>
+
+      <div id="page3">
+        <div id="page3-heading-1">(Nos Races)</div>
+        <div id="intro-container-1">
+            <div id="behind-intro-1">
+                Chaque lignée est choisie pour sa santé et la qualité de sa chair — du format simple au
+                grand lot pour les professionnels.
+            </div>
+
+            <div id="above-intro-1">
+                Chaque lignée est choisie pour sa santé et la qualité de sa chair — du format simple au
+                grand lot pour les professionnels.
+            </div>
+        </div>
+        <div id="page3-img">
+            <img src="IMAGES/Snapchat-533353503~1.webp" loading="lazy" alt="Lapin d'élevage">
+            <span class="plate-mark">Plate II</span>
+        </div>
+        <div id="page3-img-2">
+            <img src="IMAGES/Snapchat-73962748~1.webp" loading="lazy" alt="Lapin d'élevage">
+            <span class="plate-mark">Plate III</span>
+        </div>
+        <div id="page3-img-3">
+            <img src="IMAGES/Snapchat-763078288~1.webp" loading="lazy" alt="Lapin d'élevage">
+            <span class="plate-mark">Plate IV</span>
+        </div>
+    </div>
+
+    <section id="sec-gallery" class="fx-section">
+        <div class="eyebrow" data-no="No. 04">(Triptyque)</div>
+        <div class="triptych-wrapper">
+            <div class="trip-panel trip-side"><img src="IMAGES/Snapchat-90679770~1.webp" loading="lazy" alt="Lapin"></div>
+            <div class="trip-panel trip-center"><img src="IMAGES/Snapchat-1016404691~1.webp" loading="lazy" alt="Lapin"></div>
+            <div class="trip-panel trip-side"><img src="IMAGES/Snapchat-1244423645~1.webp" loading="lazy" alt="Lapin"></div>
+        </div>
+    </section>
+
+    <section id="sec-iris" class="fx-section">
+        <div class="eyebrow" data-no="No. 05">(Portrait)</div>
+        <h2 class="iris-word">CHEZ FLORENCE</h2>
+        <div class="takeover-layer iris-mask">
+            <img src="IMAGES/Snapchat-533353503~1.webp" loading="lazy" alt="Portrait de lapin">
+        </div>
+    </section>
+
+    <section id="sec-blob" class="fx-section">
+        <div class="eyebrow" data-no="No. 06">(En Mouvement)</div>
+        <div class="blob-mask">
+            <video id="blob-video" muted loop playsinline preload="metadata"
+                src="IMAGES/Snapchat-1680052335.webm"></video>
+        </div>
+    </section>
+    <div id="page5">
+        <div id="page5-hero">
+            <video id="page5-hero-video" muted autoplay loop playsinline preload="auto"
+                poster="IMAGES/Snapchat-1016404691~1.webp"
+                src="IMAGES/Snapchat-1268559920.webm"></video>
+            <div id="page5-hero-content">
+                <img id="contact-logo" src="IMAGES/logo.png" alt="CHEZ FLORENCE logo">
+                
+                <h1 id="page5-hero-title">Contactez-nous directement</h1>
+                <p id="page5-hero-subtitle">Réponse rapide, conseils bienveillants. Nous sommes là pour vous aider dans vos commandes et vos questions sur nos lapins.</p>
+                <div id="page5-contact-buttons">
+                    <a href="https://instagram.com" target="_blank" class="contact-btn">
+                        <i class="ri-instagram-line"></i> Instagram
+                    </a>
+                    <a href="https://wa.me/2250142507750" target="_blank" class="contact-btn primary">
+                        <i class="ri-whatsapp-line"></i> WhatsApp
+                    </a>
+                    <a href="mailto:wthomasss06@gmail.com" class="contact-btn">
+                        <i class="ri-mail-line"></i> wthomasss06@gmail.com
+                    </a>
+                </div>
+            </div>
+            <div id="page5-hero-footer-overlay">
+              <div class="footer-overlay-left">
+                <div class="footer-overlay-item">Conçu par <a href="https://akatech.vercel.app/" target="_blank" style="color: rgba(243,233,218,0.85); text-decoration: underline;">AKATech</a></div>
+                <div class="footer-overlay-item">© 2026 CHEZ FLORENCE</div>
+              </div>
+              <div class="footer-overlay-left" style="text-align: right;">
+                <div class="footer-overlay-item">Tous droits réservés</div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- duplicate footer removed: contact info now shown as overlay on hero -->
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"
+        integrity="sha512-NcZdtrT77bJr4STcmsGAESr06BYGE8woZdSdEgqnpyqac7sugNO+Tr4bGwGF3MsnEkGKhU2KL2xh6Ec+BqsaHA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"
+        integrity="sha512-P2IDYZfqSwjcSjX0BKeNhwRUH8zRPGlgcWl5n6gBLzdi4Y5/0O4zaXrtO4K9TZK6Hn1BenYpKowuCavNandERg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/SplitText.min.js"
+        integrity="sha512-wOeEC+9qERAzhliwBFPDb6t8TiFFxdxG8vhK/Ygs7TuC44bpg8pg/X2/U/u+0X4fK05wb9id1EIipnF02+CFQw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/lenis@1.3.17/dist/lenis.min.js"></script>
+    <script>
+window.addEventListener("DOMContentLoaded", () => {
+
+gsap.registerPlugin(ScrollTrigger, SplitText);
+
+const isDesktop = window.matchMedia("(pointer: fine)").matches;
+
+const lenis = new Lenis({
+  lerp: isDesktop ? 0.08 : 0.18,  
+  smoothWheel: true,
+  smoothTouch: true,
+  syncTouch: true,
+  wheelMultiplier: isDesktop ? 0.8 : 0.6,
+  touchMultiplier: 0.9,   
+  normalizeWheel: true,
+  infinite: false,
+  overscroll: false,
+});
+
+
+lenis.on("scroll", ScrollTrigger.update);
+
+gsap.ticker.add((time) => {
+  lenis.raf(time * 1000);
+});
+
+gsap.ticker.lagSmoothing(0);
+
+
+const c = document.querySelector("#cursor");
+let mx = innerWidth/2, my = innerHeight/2, px = mx, py = my;
+
+addEventListener("mousemove", e => (mx = e.clientX, my = e.clientY));
+
+const xTo = gsap.quickTo(c, "x", { duration: 0.7, ease: "power4.out" });
+const yTo = gsap.quickTo(c, "y", { duration: 0.7, ease: "power4.out" });
+
+gsap.ticker.add(() => {
+  xTo(mx);
+  yTo(my);
+
+  const dx = mx - px, v = Math.hypot(dx, my - py);
+
+  gsap.to(c, {
+    skewX: gsap.utils.clamp(-8, 8, dx * 0.25),
+    scaleX: 1 + v * 0.01,
+    scaleY: 1 - v * 0.01,
+    rotate: dx * 0.15,
+    duration: 0.55,
+    ease: "power4.out"
+  });
+
+  px = mx; py = my;
+});
+
+  const marquee = document.querySelector(".marquee-track");
+  if (marquee) {
+    const width = marquee.scrollWidth / 2;
+    gsap.to(".marquee-track", {
+      x: -width,
+      duration: 12,
+      ease: "none",
+      repeat: -1
+    });
+  }
+
+  gsap.to("#above-intro", {
+    clipPath: "inset(0 0 0% 0)",
+    ease: "none",
+    scrollTrigger: {
+      trigger: "#intro-container",
+      start: "top 80%",
+      end: "top 30%",
+      scrub: 2
+    }
+  });
+
+  gsap.to("#above-intro-1", {
+    clipPath: "inset(0 0 0% 0)",
+    ease: "none",
+    scrollTrigger: {
+      trigger: "#intro-container-1",
+      start: "top 80%",
+      end: "top 30%",
+      scrub: 2
+    }
+  });
+
+  const scrollLine = document.querySelector("#scroll-line line");
+  if (scrollLine) {
+    const length = scrollLine.getTotalLength();
+    gsap.set(scrollLine, {
+      strokeDasharray: length,
+      strokeDashoffset: length
+    });
+
+    gsap.to(scrollLine, {
+      strokeDashoffset: 0,
+      ease: "none",
+      scrollTrigger: {
+        trigger: "#scroll-line",
+        start: "top 80%",
+        end: "top 40%",
+        scrub: 4,
+        once: true
+      }
+    });
+  }
+
+  gsap.to("#page3-img-2",{
+    xPercent: 120,
+    duration: 1,
+    ease: "none",
+    scrollTrigger: {
+      trigger: "#page3-img-2",
+      scroller: "body",
+      start: "top 100%",
+      end: "top -40%",
+      scrub: 2.5
+    }
+  });
+    gsap.to("#page3-img-3",{
+    xPercent: -120,
+    duration: 1,
+    ease: "none",
+    scrollTrigger: {
+      trigger: "#page3-img-3",
+      scroller: "body",
+      start: "top 120%",
+      end: "top -40%",
+      scrub: 2.5
+    }
+  });
+
+  const fxMM = gsap.matchMedia();
+
+  fxMM.add("(min-width: 800px)", () => {
+
+    // No. 04 — Triptyque : LE DÉPLOIEMENT EN TRIPTYQUE
+    const tripTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#sec-gallery",
+        pin: true,
+        start: "center center",
+        end: "+=1200",
+        scrub: 1
+      }
+    });
+
+    // Les colonnes latérales se réduisent à 0, la centrale prend tout l'espace
+    tripTl.to(".trip-side", { flex: 0, opacity: 0, margin: 0, ease: "power2.inOut" }, 0)
+          .to(".triptych-wrapper", { width: "100vw", height: "100vh", gap: 0, ease: "power2.inOut" }, 0)
+          .to(".trip-panel", { borderRadius: 0, ease: "power2.inOut" }, 0);
+
+    // No. 05 — Portrait : iris cinématique
+    gsap.to(".iris-mask", {
+      scrollTrigger: {
+        trigger: "#sec-iris",
+        pin: true,
+        start: "center center",
+        end: "+=1000",
+        scrub: 1
+      },
+      clipPath: "circle(150% at 50% 50%)",
+      ease: "power2.inOut"
+    });
+
+    // No. 06 — En Mouvement : éclosion organique
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: "#sec-blob",
+        pin: true,
+        start: "center center",
+        end: "+=1200",
+        scrub: 1
+      }
+    })
+      .to(".blob-mask", {
+        scale: 1,
+        borderRadius: "0%",
+        ease: "power3.inOut"
+      }, 0)
+      .to("#blob-video", {
+        scale: 1,
+        ease: "power2.out"
+      }, 0);
+
+    const blobVideo = document.querySelector("#blob-video");
+    if (blobVideo) {
+      ScrollTrigger.create({
+        trigger: "#sec-blob",
+        start: "top bottom",
+        end: "bottom top",
+        onEnter: () => blobVideo.play().catch(() => {}),
+        onEnterBack: () => blobVideo.play().catch(() => {}),
+        onLeave: () => blobVideo.pause(),
+        onLeaveBack: () => blobVideo.pause()
+      });
+    }
+  });
+
+  // Counter animation for stats
+  const statNumbers = document.querySelectorAll(".stat-number");
+  if (statNumbers.length) {
+    const targets = [27, 4, 10];
+    
+    statNumbers.forEach((num, idx) => {
+      const counter = { value: 0 };
+      gsap.to(counter, {
+        value: targets[idx],
+        duration: 2.5,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: "#page1-stats",
+          start: "top 80%",
+          end: "top 20%",
+          scrub: 1,
+          once: true
+        },
+        onUpdate: () => {
+          num.textContent = Math.floor(counter.value);
+          if (idx === 2 && counter.value > 9) num.textContent += "+";
+        }
+      });
+    });
+  }
+
+  gsap.from(".price-card", {
+    y: 40,
+    autoAlpha: 0,
+    duration: 0.8,
+    stagger: 0.15,
+    ease: "power2.out",
+    scrollTrigger: {
+      trigger: ".pricing-grid",
+      start: "top 82%",
+      toggleActions: "play none none reverse"
+    }
+  });
+
+  const wave = document.querySelectorAll("#page4-wave-div div");
+  if (wave.length) {
+    gsap.from(wave, {
+      y: 60,
+      autoAlpha: 0,
+      duration: 1,
+      ease: "power4.out",
+      stagger: {
+        each: 0.3,
+        from: "center"
+      },
+      scrollTrigger: {
+        trigger: "#page4-wave-div",
+        start: "top 90%",
+        end: "bottom 40%",
+        scrub: 2
+      }
+    });
+  }
+ 
+gsap.to("#page3", {
+  backgroundColor: "#F3E9DA",
+  scrollTrigger: {
+    trigger: "#page3",
+    scroller: "body",
+    start: "top -130%",
+    end: "bottom -30%",
+    scrub: 1
+  },
+  ease: "power2.out"
+});
+
+  const hoverImage = document.querySelector("#hover-img");
+  const hoverItem = document.querySelectorAll(".hover-item");
+
+  if (hoverImage) {
+    gsap.set(hoverImage, { xPercent: -50, yPercent: -50 });
+
+    window.addEventListener("mousemove", (e) => {
+      gsap.to(hoverImage, {
+        x: e.clientX,
+        y: e.clientY,
+        duration: 0.5,
+        ease: "power.out"
+      });
+    });
+
+    hoverItem.forEach(item => {
+      item.addEventListener("mouseenter", () => {
+        hoverImage.style.backgroundImage = item.dataset.img;
+        hoverImage.style.opacity = 1;
+      });
+
+      item.addEventListener("mouseleave", () => {
+        hoverImage.style.opacity = 0;
+      });
+    });
+  } 
+
+  document.querySelectorAll("[data-video-target]").forEach((trigger) => {
+    const video = document.querySelector(trigger.dataset.videoTarget)?.querySelector("video");
+    if (!video) return;
+
+    trigger.addEventListener("mouseenter", () => {
+      video.currentTime = 0;
+      video.play().catch(() => {});
+    });
+
+    trigger.addEventListener("mouseleave", () => {
+      video.pause();
+    });
+  });
+
+  document.fonts.ready.then(() => {
+    const wrapper = document.querySelector(".Horizontal");
+    const text = document.querySelector(".Horizontal__text");
+
+    if (wrapper && text) {
+      const split10 = SplitText.create(text, { type: "chars,words" });
+
+      const scrollTween = gsap.to(text, {
+        xPercent: -100,
+        ease: "none",
+        scrollTrigger: {
+          trigger: wrapper,
+          pin: true,
+          end: "+=5000px",
+          scrub: true
+        }
+      });
+
+      split10.chars.forEach((char) => {
+        gsap.from(char, {
+          yPercent: "random(-200,200)",
+          rotation: "random(-20,20)",
+          ease: "back.out(1.2)",
+          scrollTrigger: {
+            trigger: char,
+            containerAnimation: scrollTween,
+            start: "left 100%",
+            end: "left 30%",
+            scrub: 1
+          }
+        });
+      });
+    }
+
+    document.querySelectorAll(".split-heading").forEach((heading) => {
+      const split5 = new SplitText(heading, {
+        type: "lines",
+        linesClass: "line"
+      });
+
+      gsap.from(split5.lines, {
+        yPercent: 60,
+        autoAlpha: 0,
+        duration: 1.2,
+        ease: "power4.out",
+        stagger: 0.08,
+        scrollTrigger: {
+          trigger: heading,
+          start: "top 80%",
+          end: "top 30%",
+          scrub: 1.5,
+          once: true
+        }
+      });
+    });
+
+const split6 = new SplitText(".split-heading-1", { type: "chars" });
+
+gsap.set(split6.chars, {
+  yPercent: 60,
+  rotateX: -35,
+  skewX: -7,
+  autoAlpha: 0,
+});
+
+gsap.to(split6.chars, {
+  yPercent: 0,
+  rotateX: 0,
+  skewX: 0,
+  autoAlpha: 1,
+  duration: 1.4,
+  ease: "power4.out",
+  stagger: {
+    amount: 0.55,
+    from: "start"
+  },
+  scrollTrigger: {
+    trigger: ".split-heading-1",
+    start: "top 90%",
+    end: "top 0%",
+    scrub: 3.8,
+    once: true,                           
+    markers: false
+  }
+});
+
+    const mm = gsap.matchMedia();
+
+    mm.add("(min-width: 800px)", () => initLoader(false));
+    mm.add("(max-width: 767px)", () => initLoader(true));
+
+    function initLoader(isMobile) {
+      const counterEl = document.querySelector("#loader-counter");
+      const stairs = document.querySelectorAll("#loader div");
+      const line2 = document.querySelector("#loader-line line");
+
+      if (!counterEl || !line2) return;
+
+      const length2 = line2.getTotalLength();
+      let counter = { value: 0 };
+
+      gsap.set(line2, {
+        strokeDasharray: length2,
+        strokeDashoffset: length2
+      });
+
+      gsap.set("#loader-line", {
+        scaleX: -1,
+        transformOrigin: "center"
+      });
+
+      const tl = gsap.timeline({
+        defaults: {
+          ease: "power3.out"
+        }
+      });
+
+      tl.to(counter, {
+        value: 100,
+        duration: 2.2,
+        ease: "sine.out",
+        onUpdate: () => {
+          counterEl.textContent = Math.floor(counter.value);
+        }
+      }, "start");
+
+      tl.to(line2, {
+        strokeDashoffset: 0,
+        duration: 2.2,
+        ease: "none"
+      }, "start");
+
+      tl.call(() => {
+        const split = new SplitText(counterEl, { type: "chars" });
+        gsap.to(split.chars, {
+          xPercent: 80,
+          autoAlpha: 0,
+          stagger: { amount: 0.35, from: "end" },
+          duration: 0.8,
+          ease: "expo.inOut"
+        });
+      }, null, "start+=2.25");
+
+      tl.to(line2, {
+        autoAlpha: 0,
+        duration: 0.45,
+        ease: "sine.out"
+      }, "start+=2.4");
+
+      tl.to(stairs, {
+        y: "-110%",
+        duration: 1.25,
+        stagger: {
+          amount: 0.4,
+          from: "center"
+        },
+        ease: "power3.inOut"
+      }, "start+=2.7");
+
+      const splitHeading = new SplitText("#heading1", { type: "chars" });
+
+      tl.from(splitHeading.chars, {
+        y: isMobile ? 120 : 80,
+        autoAlpha: 0,
+        duration: isMobile ? 1.05 : 1.2,
+        stagger: { amount: 0.4 },
+        ease: "power2.out"
+      }, "start+=3.4");
+
+      tl.from("#page1-img-1", {
+        y: 150,
+        scale: 0.97,
+        autoAlpha: 0,
+        duration: 0.85,
+        ease: "power3.out"
+      }, "start+=3.9");
+
+      tl.from("nav", {
+        y: -22,
+        autoAlpha: 0,
+        duration: 0.65,
+        stagger: 0.07,
+        ease: "power2.out"
+      }, "start+=4");
+
+      tl.from(".hero-content", {
+        y: 26,
+        autoAlpha: 0,
+        duration: 0.8,
+        ease: "power2.out"
+      }, "start+=4.15");
+
+      tl.call(() => {
+        document.querySelector("#loader")?.remove();
+      });
+    }
+  });
+});
+
+    </script>
+</body>
+
+</html>
